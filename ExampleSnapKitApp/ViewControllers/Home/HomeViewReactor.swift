@@ -7,12 +7,13 @@ class HomeViewReactor:Reactor {
     enum Action {
         case didTapLogin(AuthInput)
         case didTapShowHidden
-      
+        
     }
     
     enum Mutation {
         case setLoading(Bool)
         case setShowPassword
+        case setLogged(Bool)
         
     }
     
@@ -32,12 +33,12 @@ class HomeViewReactor:Reactor {
     func mutate(action: Action) -> Observable<Mutation> {
         switch action {
         case .didTapLogin(let model):
-            print("model \(model)")
             let setLoading:Observable<Mutation> = .just(Mutation.setLoading(true))
-            let fetchUser:Observable<Mutation> = Observable.create { observer in
-                return Disposables.create()
+            let fetchUser:Observable<Mutation> = AuthRespository().requestLogin(data: model).map { model in
+                Mutation.setLogged(model.success)
             }
-            return Observable<Mutation>.concat([setLoading,fetchUser])
+            let setFinish:Observable<Mutation> = .just(Mutation.setLoading(false))
+            return Observable<Mutation>.concat([setLoading,fetchUser,setFinish])
         case .didTapShowHidden:
             return .just(Mutation.setShowPassword)
         }
@@ -52,6 +53,9 @@ class HomeViewReactor:Reactor {
         case .setShowPassword:
             state.isShowPassword = !state.isShowPassword
             break
+        case .setLogged(let isLogged):
+            state.isLoading = false
+            state.logged = isLogged
         }
         return state
     }

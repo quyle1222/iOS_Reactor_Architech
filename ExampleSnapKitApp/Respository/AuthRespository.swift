@@ -11,7 +11,7 @@ import RxSwift
 
 class AuthRespository {
     var netword = AFNetwork()
-    func requestLogin(data:AuthInput)->Observable<AuthOutput>{
+    func requestLogin(data:AuthInput)-> Observable<AuthOutput> {
         return Observable.create { observer in
             let result = Disposables.create()
             guard let paramester = try? data.asDictionary() else {return result}

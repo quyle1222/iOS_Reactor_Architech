@@ -44,7 +44,6 @@ class HomeViewController: BaseViewController,View {
     }
     
     let lblShowHiddenPassword = UIButton().then {
-        $0.setTitle("Show password", for: .normal)
         $0.titleLabel?.textAlignment = .left
         $0.titleLabel?.font = .systemFont(ofSize: 16, weight: .regular)
         $0.setTitleColor(.black, for: .normal)
@@ -75,14 +74,15 @@ class HomeViewController: BaseViewController,View {
     }
     
     func bind(reactor: HomeViewReactor) {
-        let userInputs = Observable.combineLatest(textFieldUsername.rx.text.orEmpty,textFieldPassword.rx.text.orEmpty) {(email, password) -> AuthInput in
-            return AuthInput(username:email, password:password)
-        }
         
         //Action
         btnLogin.rx.tap
-            .withLatestFrom(userInputs)
-            .map { model in  Reactor.Action.didTapLogin(model) }
+            .withLatestFrom(Observable.combineLatest(textFieldUsername.rx.text.orEmpty,
+                                                     textFieldPassword.rx.text.orEmpty)
+                            {(email, password) -> AuthInput in
+                return AuthInput(username:email, password:password)
+            })
+            .map { model in Reactor.Action.didTapLogin(model)}
             .bind(to: reactor.action)
             .disposed(by: disposeBag)
         
@@ -103,10 +103,8 @@ class HomeViewController: BaseViewController,View {
             .map {$0.isShowPassword}
             .distinctUntilChanged()
             .subscribe { state in
-                DispatchQueue.main.async {
-                    self.lblShowHiddenPassword.setTitle(state ? "Hidden password" : "Show password", for: .normal)
-                    self.textFieldPassword.isSecureTextEntry = !state
-                }
+                self.lblShowHiddenPassword.setTitle(state ? "Hidden password" : "Show password", for: .normal)
+                self.textFieldPassword.isSecureTextEntry = !state
             }.disposed(by: disposeBag)
     }
 }

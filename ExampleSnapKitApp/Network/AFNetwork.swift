@@ -16,14 +16,14 @@ enum KeyENV:String {
 }
 
 enum PathUrl: String {
-    case LOGIN = "api/auth/create"
+    case LOGIN = "api/auth/login"
 }
 
 class AFNetwork {
-    var baseURL:String!
-    init(){
-        baseURL = Bundle.main.object(forInfoDictionaryKey: KeyENV.BASE_URL.toString) as? String ?? ""
-    }
+    var baseURL:String! = KeyENV.BASE_URL.rawValue
+//    init(){
+//        baseURL = Bundle.main.object(forInfoDictionaryKey: KeyENV.BASE_URL.toString) as? String ?? ""
+//    }
     
     func getAPI(url: PathUrl, paramester: Parameters = [:]) -> DataRequest {
         return AF.request(baseURL + url.rawValue,
