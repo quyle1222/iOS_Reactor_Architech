@@ -7,14 +7,12 @@ class HomeViewReactor:Reactor {
     enum Action {
         case didTapLogin(AuthInput)
         case didTapShowHidden
-        
     }
     
     enum Mutation {
         case setLoading(Bool)
         case setShowPassword
         case setLogged(Bool)
-        
     }
     
     struct State {

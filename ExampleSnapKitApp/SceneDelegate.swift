@@ -18,15 +18,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         guard let windowScene = (scene as? UIWindowScene) else { return }
         self.window = UIWindow(windowScene: windowScene)
-        //self.window =  UIWindow(frame: UIScreen.main.bounds)
-        
-        //        let storyboard = UIStoryboard(name: "MyStoryboardName", bundle: nil)
-        //        guard let rootVC = storyboard?.instantiateViewController(identifier: "ViewControllerIdentifierName") as? ViewController else {
-        //            print("ViewController not found")
-        //            return
-        //        }
-        
-        let rootNC = UINavigationController(rootViewController: HomeViewController(reactor: HomeViewReactor()))
+//        let rootNC = UINavigationController(rootViewController: HomeViewController(reactor: HomeViewReactor()))
+        let rootNC = UINavigationController(rootViewController: ExploreViewController(reactor: ExploreViewReactor()))
         self.window?.rootViewController = rootNC
     }
     

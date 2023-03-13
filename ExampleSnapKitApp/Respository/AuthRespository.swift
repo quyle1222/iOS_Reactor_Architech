@@ -18,13 +18,10 @@ class AuthRespository {
             self.netword.postAPI(url: .LOGIN,paramester: paramester).responseDecodable(of: AuthOutput.self) { response in
                 if let error = response.error {
                     observer.onError(error)
-                    observer.onCompleted()
-                    return
-                }
-                if let output = response.value {
+                } else if let output = response.value {
                     observer.onNext(output)
-                    observer.onCompleted()
                 }
+                observer.onCompleted()
             }
             return result
         }

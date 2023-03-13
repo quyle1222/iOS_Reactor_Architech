@@ -5,7 +5,12 @@ import UIKit
 import RxSwift
 import Then
 
+fileprivate struct Status:Equatable {
+    var isLoading:Bool
+    var isLogged:Bool
+}
 class HomeViewController: BaseViewController,View {
+    
     var disposeBag: RxSwift.DisposeBag = DisposeBag()
     typealias Reactor = HomeViewReactor
     let lblWellcome = UILabel().then {
@@ -74,7 +79,6 @@ class HomeViewController: BaseViewController,View {
     }
     
     func bind(reactor: HomeViewReactor) {
-        
         //Action
         btnLogin.rx.tap
             .withLatestFrom(Observable.combineLatest(textFieldUsername.rx.text.orEmpty,
@@ -91,20 +95,29 @@ class HomeViewController: BaseViewController,View {
             .bind(to: reactor.action)
             .disposed(by: disposeBag)
         
-        //State
-        reactor.state.asObservable()
-            .map {$0.isLoading}
-            .distinctUntilChanged()
-            .subscribe { state in
-                print("IsLoading :\(state)")
-            }.disposed(by: disposeBag)
-        
         reactor.state.asObservable()
             .map {$0.isShowPassword}
             .distinctUntilChanged()
             .subscribe { state in
                 self.lblShowHiddenPassword.setTitle(state ? "Hidden password" : "Show password", for: .normal)
                 self.textFieldPassword.isSecureTextEntry = !state
+            }.disposed(by: disposeBag)
+        
+        Observable.combineLatest(reactor.state.asObservable().map{$0.isLoading}, reactor.state.asObservable().map{$0.logged}, resultSelector: { isLoading, isLogged -> Status  in
+            return Status(isLoading: isLoading, isLogged: isLogged)
+        }).asObservable()
+            .distinctUntilChanged()
+            .subscribe { status in
+                if status.element?.isLoading == true {
+                    self.showLoading()
+                } else {
+                    self.dismissLoading(){
+                        if status.element?.isLogged == true {
+                            let vc = ExploreViewController(reactor: ExploreViewReactor())
+                            self.navigationController?.pushViewController(vc, animated: true)
+                        }
+                    }
+                }
             }.disposed(by: disposeBag)
     }
 }

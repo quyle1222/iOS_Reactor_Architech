@@ -11,7 +11,8 @@ target 'ExampleSnapKitApp' do
   pod 'SnapKit', '~> 5.6'
   pod 'ReactorKit', '~> 3.2'
   pod 'Then'
-  pod 'ReusableKit'
+  pod 'ReusableKit', '~> 3.0'
   pod 'Alamofire', '~> 5.6'
-
+  pod 'RxDataSources', '~> 5.0'
+  pod 'RxOptional', '~> 5.0'
 end
