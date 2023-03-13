@@ -17,19 +17,20 @@ enum KeyENV:String {
 
 enum PathUrl: String {
     case LOGIN = "api/auth/login"
+    case LIST_NEWS = "api/news/getList"
 }
 
-class AFNetwork {
+final class AFNetwork {
     var baseURL:String! = KeyENV.BASE_URL.rawValue
     
-    func getAPI(url: PathUrl, paramester: Parameters = [:]) -> DataRequest {
+    func getAPI(url: PathUrl, paramester: Parameters? = nil) -> DataRequest {
         return AF.request(baseURL + url.rawValue,
                           method: .get,
                           parameters: paramester,
                           encoding: JSONEncoding.default)
     }
     
-    func postAPI(url: PathUrl, paramester: Parameters = [:]) -> DataRequest {
+    func postAPI(url: PathUrl, paramester: Parameters? = nil) -> DataRequest {
         return AF.request(baseURL + url.rawValue,
                           method: .post,
                           parameters: paramester,

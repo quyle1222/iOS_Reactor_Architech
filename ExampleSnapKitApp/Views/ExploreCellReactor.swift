@@ -9,12 +9,24 @@ import ReactorKit
 import RxCocoa
 import RxSwift
 
-class ExploreCellReactor {
-    typealias Action = NoAction
-
-     let initialState: NoAction
-
-     init(task: NoAction) {
-       self.initialState = task
-     }
+class ExploreCellReactor:Reactor {
+    
+    enum Action {
+        case setList(Int)
+    }
+    
+    enum Mutation {
+        case setList(Int)
+    }
+    
+    var initialState: State
+    
+    struct State {
+    }
+    
+    init() {
+        initialState = State()
+    }
+    
+  
 }

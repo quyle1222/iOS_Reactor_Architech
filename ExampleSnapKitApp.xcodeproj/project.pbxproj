@@ -21,10 +21,12 @@
 		362091A629BEC3C7000CC6DF /* Explore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 362091A529BEC3C7000CC6DF /* Explore.swift */; };
 		362091A929BEC53D000CC6DF /* ExploreSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 362091A829BEC53D000CC6DF /* ExploreSection.swift */; };
 		362091AB29BEC8D9000CC6DF /* ExploreCellReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 362091AA29BEC8D9000CC6DF /* ExploreCellReactor.swift */; };
+		3688D1B329BF00B900352B55 /* NewsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3688D1B229BF00B900352B55 /* NewsRepository.swift */; };
+		3688D1B529BF012500352B55 /* News.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3688D1B429BF012500352B55 /* News.swift */; };
 		36B7300029BAC1D700A8D286 /* TextField+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36B72FF729BAC1D700A8D286 /* TextField+Extension.swift */; };
 		36B7300129BAC1D700A8D286 /* Encodable+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36B72FF829BAC1D700A8D286 /* Encodable+Extension.swift */; };
 		36B7300229BAC1D700A8D286 /* AFNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36B72FFA29BAC1D700A8D286 /* AFNetwork.swift */; };
-		36B7300329BAC1D700A8D286 /* AuthRespository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36B72FFC29BAC1D700A8D286 /* AuthRespository.swift */; };
+		36B7300329BAC1D700A8D286 /* AuthRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36B72FFC29BAC1D700A8D286 /* AuthRepository.swift */; };
 		36B7300429BAC1D700A8D286 /* Auth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36B72FFF29BAC1D700A8D286 /* Auth.swift */; };
 		36D1F78F29BB160D00BA8D3E /* ExploreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D1F78E29BB160D00BA8D3E /* ExploreViewController.swift */; };
 		36D1F79229BB161F00BA8D3E /* ExploreViewReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D1F79129BB161F00BA8D3E /* ExploreViewReactor.swift */; };
@@ -47,10 +49,12 @@
 		362091A529BEC3C7000CC6DF /* Explore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Explore.swift; sourceTree = "<group>"; };
 		362091A829BEC53D000CC6DF /* ExploreSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreSection.swift; sourceTree = "<group>"; };
 		362091AA29BEC8D9000CC6DF /* ExploreCellReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreCellReactor.swift; sourceTree = "<group>"; };
+		3688D1B229BF00B900352B55 /* NewsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsRepository.swift; sourceTree = "<group>"; };
+		3688D1B429BF012500352B55 /* News.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = News.swift; sourceTree = "<group>"; };
 		36B72FF729BAC1D700A8D286 /* TextField+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TextField+Extension.swift"; sourceTree = "<group>"; };
 		36B72FF829BAC1D700A8D286 /* Encodable+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Encodable+Extension.swift"; sourceTree = "<group>"; };
 		36B72FFA29BAC1D700A8D286 /* AFNetwork.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AFNetwork.swift; sourceTree = "<group>"; };
-		36B72FFC29BAC1D700A8D286 /* AuthRespository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthRespository.swift; sourceTree = "<group>"; };
+		36B72FFC29BAC1D700A8D286 /* AuthRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthRepository.swift; sourceTree = "<group>"; };
 		36B72FFF29BAC1D700A8D286 /* Auth.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Auth.swift; sourceTree = "<group>"; };
 		36D1F78E29BB160D00BA8D3E /* ExploreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreViewController.swift; sourceTree = "<group>"; };
 		36D1F79129BB161F00BA8D3E /* ExploreViewReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreViewReactor.swift; sourceTree = "<group>"; };
@@ -130,8 +134,8 @@
 		3600A0C329B9856300F4B019 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				36D1F78D29BB15F200BA8D3E /* Explore */,
 				3600A0C529B9867A00F4B019 /* BaseViewController.swift */,
+				36D1F78D29BB15F200BA8D3E /* Explore */,
 				3600A0C429B9866200F4B019 /* Home */,
 			);
 			path = ViewControllers;
@@ -150,6 +154,7 @@
 			isa = PBXGroup;
 			children = (
 				362091A529BEC3C7000CC6DF /* Explore.swift */,
+				3688D1B429BF012500352B55 /* News.swift */,
 			);
 			path = Explore;
 			sourceTree = "<group>";
@@ -182,7 +187,8 @@
 		36B72FFB29BAC1D700A8D286 /* Respository */ = {
 			isa = PBXGroup;
 			children = (
-				36B72FFC29BAC1D700A8D286 /* AuthRespository.swift */,
+				36B72FFC29BAC1D700A8D286 /* AuthRepository.swift */,
+				3688D1B229BF00B900352B55 /* NewsRepository.swift */,
 			);
 			path = Respository;
 			sourceTree = "<group>";
@@ -342,6 +348,7 @@
 				362091A929BEC53D000CC6DF /* ExploreSection.swift in Sources */,
 				3600A0B329B9854E00F4B019 /* ViewController.swift in Sources */,
 				3600A0CA29B986C000F4B019 /* HomeViewReactor.swift in Sources */,
+				3688D1B529BF012500352B55 /* News.swift in Sources */,
 				3600A0C629B9867A00F4B019 /* BaseViewController.swift in Sources */,
 				362091AB29BEC8D9000CC6DF /* ExploreCellReactor.swift in Sources */,
 				36B7300029BAC1D700A8D286 /* TextField+Extension.swift in Sources */,
@@ -350,8 +357,9 @@
 				36B7300229BAC1D700A8D286 /* AFNetwork.swift in Sources */,
 				36D1F78F29BB160D00BA8D3E /* ExploreViewController.swift in Sources */,
 				3600A0AF29B9854E00F4B019 /* AppDelegate.swift in Sources */,
+				3688D1B329BF00B900352B55 /* NewsRepository.swift in Sources */,
 				3600A0B129B9854E00F4B019 /* SceneDelegate.swift in Sources */,
-				36B7300329BAC1D700A8D286 /* AuthRespository.swift in Sources */,
+				36B7300329BAC1D700A8D286 /* AuthRepository.swift in Sources */,
 				362091A029BEBF50000CC6DF /* ExploreCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

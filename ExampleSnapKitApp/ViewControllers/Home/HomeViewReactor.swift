@@ -2,7 +2,7 @@ import ReactorKit
 import RxSwift
 import RxCocoa
 
-class HomeViewReactor:Reactor {
+final class HomeViewReactor:Reactor {
     var initialState: State
     enum Action {
         case didTapLogin(AuthInput)
@@ -32,7 +32,7 @@ class HomeViewReactor:Reactor {
         switch action {
         case .didTapLogin(let model):
             let setLoading:Observable<Mutation> = .just(Mutation.setLoading(true))
-            let fetchUser:Observable<Mutation> = AuthRespository().requestLogin(data: model).map { model in
+            let fetchUser:Observable<Mutation> = AuthRepository().requestLogin(data: model).map { model in
                 Mutation.setLogged(model.success)
             }
             let setFinish:Observable<Mutation> = .just(Mutation.setLoading(false))

@@ -11,10 +11,18 @@ import Then
 import ReactorKit
 
 class ExploreCell: UITableViewCell,View {
-    typealias Reactor = <#type#>
+    
+    typealias Reactor = ExploreCellReactor
+
+    var disposeBag: RxSwift.DisposeBag = DisposeBag()
     
     let imgView = UIImageView(frame: .zero).then {
         $0.translatesAutoresizingMaskIntoConstraints = false
+    }
+    
+    let lblTitle = UILabel().then {
+        $0.text = "Title"
+        $0.font = .systemFont(ofSize: 16, weight: .bold)
     }
     
     override func awakeFromNib() {
@@ -33,17 +41,32 @@ class ExploreCell: UITableViewCell,View {
         super.prepareForReuse()
         imgView.image = nil
     }
+    
+    func bind(reactor: Reactor) {
+        
+    }
 }
 
 extension ExploreCell {
     
     func setupSubview(){
+        contentView.addSubview(lblTitle)
         contentView.addSubview(imgView)
     }
     
+    func setupUI(){
+        contentView.backgroundColor = .blue
+    }
+    
     func setupConstraints() {
+        lblTitle.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(10)
+            make.horizontalEdges.equalToSuperview()
+        }
+        
         imgView.snp.makeConstraints { make in
-            make.edges.equalTo(self.contentView)
+            make.top.equalTo(lblTitle.snp.bottom).offset(20)
+            make.left.bottom.right.equalTo(self.contentView)
         }
     }
 }

@@ -9,7 +9,7 @@ fileprivate struct Status:Equatable {
     var isLoading:Bool
     var isLogged:Bool
 }
-class HomeViewController: BaseViewController,View {
+final class HomeViewController: BaseViewController,View {
     
     var disposeBag: RxSwift.DisposeBag = DisposeBag()
     typealias Reactor = HomeViewReactor

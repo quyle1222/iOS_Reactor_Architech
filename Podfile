@@ -15,4 +15,6 @@ target 'ExampleSnapKitApp' do
   pod 'Alamofire', '~> 5.6'
   pod 'RxDataSources', '~> 5.0'
   pod 'RxOptional', '~> 5.0'
+  pod 'RxViewController', '~> 2.0'
+
 end

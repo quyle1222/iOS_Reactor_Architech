@@ -5,36 +5,25 @@ import ReusableKit
 import SnapKit
 import Then
 import RxDataSources
+import RxViewController
 
-class ExploreViewController: BaseViewController,View {
+final class ExploreViewController: BaseViewController,View {
+    typealias Reactor = ExploreViewReactor
+    var disposeBag: RxSwift.DisposeBag = DisposeBag()
     
     fileprivate struct Reusable {
         static let cell = ReusableCell<ExploreCell>()
     }
     
-    let dataSource = RxTableViewSectionedReloadDataSource<ExploreViewSection>(
+    lazy var dataSource = RxTableViewSectionedReloadDataSource<ExploreViewSection>(
         configureCell: { _, tableView, indexPath, reactor in
-          let cell = tableView.dequeue(Reusable.cell, for: indexPath)
-//          cell.reactor = reactor
-          return cell
-      })
-
-      let addButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: nil, action: nil)
-      let tableView = UITableView().then {
+            let cell = tableView.dequeue(Reusable.cell, for: indexPath)
+            return cell
+        })
+    
+    let tableView = UITableView().then {
         $0.allowsSelectionDuringEditing = true
         $0.register(Reusable.cell)
-      }
-        
-    
-    
-    typealias Reactor = ExploreViewReactor
-    var disposeBag: RxSwift.DisposeBag = DisposeBag()
-    
-    
-    let scrollView = UITableViewCell().then {
-        $0.backgroundColor = .white
-        $0.translatesAutoresizingMaskIntoConstraints = false
-        
     }
     
     init(reactor:ExploreViewReactor) {
@@ -54,25 +43,36 @@ class ExploreViewController: BaseViewController,View {
     }
     
     func bind(reactor: ExploreViewReactor) {
-        
+        self.rx.viewDidAppear
+            .map { _ in Reactor.Action.getListNews }
+            .bind(to: reactor.action)
+            .disposed(by: disposeBag)
+    }
+}
+
+extension ExploreViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 80
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
     
 }
 
 extension ExploreViewController {
     func addSubViews(){
-        view.addSubview(scrollView)
+        view.addSubview(tableView)
     }
     
     func setupUI(){
-        scrollView.backgroundColor = .darkGray
+        
     }
     
     func makeConstrains(){
-        scrollView.snp.makeConstraints { make in
+        tableView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
-            make.height.equalTo(1200)
         }
     }
 }

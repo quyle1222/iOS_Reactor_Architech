@@ -9,8 +9,8 @@ import Foundation
 import RxCocoa
 import RxSwift
 
-class AuthRespository {
-    var netword = AFNetwork()
+final class AuthRepository {
+    let netword = AFNetwork()
     func requestLogin(data:AuthInput)-> Observable<AuthOutput> {
         return Observable.create { observer in
             let result = Disposables.create()
